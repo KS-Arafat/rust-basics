@@ -1,8 +1,8 @@
 # Learing Rust From Scratch Through Many Docs #
 
-I like to learn things through read documentation and code examples from GitHub.
+I like to learn things through reading documentation and code examples from GitHub.
 
-**There will be no video tutorial in this repo.**
+***There will be no video tutorial in this repo.***
 
 ## Resources ##
 
@@ -23,8 +23,8 @@ or
 Then,
 
 ```shell
-cd rust-basics
+cd ./rust-basics
 cargo r
 ```
 
-### And Done ###
+### And Done 🙈 ###
