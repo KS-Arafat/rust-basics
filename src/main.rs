@@ -84,6 +84,7 @@ fn main() {
     for i in 0..=3 {
         print!("{} ", i);
     }
+    println!();
 
     // Switch Case
     // This can return values but
@@ -92,10 +93,12 @@ fn main() {
     let switch_return = match x {
         0 => "0".to_owned(),
         1..=9 => "<10".to_owned(),
+        // Can get the actual value of 'x' if it matches the case
         matched @ 10..=50 => format!("<50 Number: {}", matched),
         _ => ">10".to_owned(),
     };
     println!("{}", switch_return);
+    // Done "https://tourofrust.com/21_en.html"
 }
 
 fn add(x: f32, y: f32) -> f32 {
