@@ -1,3 +1,5 @@
+use std::any::type_name;
+
 fn main() {
     println!("Hello, world!");
 
@@ -99,6 +101,66 @@ fn main() {
     };
     println!("{}", switch_return);
     // Done "https://tourofrust.com/21_en.html"
+
+    // Struct & enum
+
+    // has to be initalized when assigning to an object
+    let obj = MyStruct {
+        x: 420,
+        y: 6.9,
+        z: String::from("From Structure"),
+        human_bool: Hbool::Yes,
+        // See we use :: for getting value from enum same with String::from
+        // it's because they are statically defined
+    };
+
+    // Can't use it control block to compare enum so use match instead
+    let human_boolean = match obj.human_bool {
+        Hbool::Yes => "Yes",
+        Hbool::No => "No",
+    };
+    println!("{} {} {} {}", obj.x, obj.y, obj.z, human_boolean);
+
+    // Array like access
+    let obj2 = TupleStruct(420, 6.9, Hbool::No);
+
+    // passing vailable by reference using & like C
+    println!("{} {} {}", obj2.0, obj2.1, get_human_boolean(&obj2.2));
+
+    // Template or Generics
+    // Pass any type of vailable to structure and
+    // it wil be morped to that type
+    let auto_type_v = Generics {
+        morph_type_variable: "Type is not static here",
+    };
+    // Also can be used in function but very complex to handle generics
+    generic_func(auto_type_v.morph_type_variable);
+
+    // Error handling
+    // Error handling functions will always return "Result" type and
+    // We have to match it with "OK" and "Err"
+    match is_even(11) {
+        Ok(v) => println!("{}", v),
+        Err(e) => println!("{}", e),
+    }
+    // Another Easy way to handle code above is to declare "main" function return type
+    // as "Result" type like "fn main()->Result<T,E>" then we can use
+    // let v = is_even(12)?; // V will contain success or error value
+
+    // Vector
+    let mut vec_str = vec![];
+    vec_str.push("R");
+    vec_str.push("u");
+    vec_str.push("s");
+    vec_str.push("t");
+    vec_str.push("💙");
+
+    for l in vec_str.iter() {
+        print!("{}", l);
+    }
+    println!();
+
+    // Next Up Ownership "https://tourofrust.com/43_en.html"
 }
 
 fn add(x: f32, y: f32) -> f32 {
@@ -109,4 +171,50 @@ fn swap(x: i32, y: i32) -> (i32, i32) {
     // Idiomatic way of returning values from function, if, match
     // or any scope block by typing expression without semicolon at  the end
     (y, x) // No semicolon at the end, returned as value
+}
+
+// C struct
+struct MyStruct {
+    x: i32,
+    y: f32,
+    z: String,
+    human_bool: Hbool,
+}
+// Tupple Structure
+struct TupleStruct(i32, f32, Hbool);
+
+// enum
+enum Hbool {
+    Yes,
+    No,
+}
+
+// Takes enum refrence as argument unlike C function arg,
+// its more like TS function args with & of course as reference
+fn get_human_boolean(enm_bool: &Hbool) -> &str {
+    match enm_bool {
+        Hbool::Yes => "Yes",
+        Hbool::No => "No",
+    }
+}
+
+// Template or Generics
+struct Generics<T> {
+    morph_type_variable: T,
+}
+
+fn generic_func<T>(_v: T) {
+    let v_type = type_name::<T>();
+    println!("Typeof {}", v_type);
+}
+
+// Error handling
+// Function has to return Result type vaiable which has generics
+
+fn is_even(i: i32) -> Result<String, String> {
+    if i % 2 == 0 {
+        Ok("Is Even".to_string())
+    } else {
+        Err("Not Even".to_string())
+    }
 }
