@@ -29,7 +29,7 @@ fn main() {
     // Functions
     println!("{:?}", add(ONE_THIRD, TWO_THIRD));
 
-    // Destructure
+    // [Destructure]
     let mut v1 = 55;
     let mut v2 = 11;
     println!("Before Swap: {:?}", [v1, v2]);
@@ -104,30 +104,31 @@ fn main() {
 
     // Struct & enum
 
-    // has to be initalized when assigning to an object
+    // [Struct]: has to be initalized when assigning to an object
     let obj = MyStruct {
         x: 420,
         y: 6.9,
         z: String::from("From Structure"),
         human_bool: Hbool::Yes,
+        // [Enum]: Path seperator(::) is used to get Hbool value
         // See we use :: for getting value from enum same with String::from
         // it's because they are statically defined
     };
 
-    // Can't use it control block to compare enum so use match instead
+    // [Enum]: Can't use it in control block to compare enum so use match instead
     let human_boolean = match obj.human_bool {
         Hbool::Yes => "Yes",
         Hbool::No => "No",
     };
     println!("{} {} {} {}", obj.x, obj.y, obj.z, human_boolean);
 
-    // Array like access
+    // [Struct]: Array like access
     let obj2 = TupleStruct(420, 6.9, Hbool::No);
 
     // passing vailable by reference using & like C
     println!("{} {} {}", obj2.0, obj2.1, get_human_boolean(&obj2.2));
 
-    // Template or Generics
+    // [Generic]: Template or Generics
     // Pass any type of vailable to structure and
     // it wil be morped to that type
     let auto_type_v = Generics {
@@ -136,8 +137,7 @@ fn main() {
     // Also can be used in function but very complex to handle generics
     generic_func(auto_type_v.morph_type_variable);
 
-    // Error handling
-    // Error handling functions will always return "Result" type and
+    // [Error Handling]: Error handling functions will always return "Result" type and
     // We have to match it with "OK" and "Err"
     match is_even(11) {
         Ok(v) => println!("{}", v),
@@ -161,19 +161,90 @@ fn main() {
     println!();
 
     // Next Up Ownership "https://tourofrust.com/43_en.html"
+
+    // Cahpter 05
+    // [Ownership]:
+    // Owner Borrow
+    let owner1 = "I can have one owner".to_string();
+    // here owner1 is owner, Ownership can moved
+    let owner2 = owner1; // Ownership changed to owner2
+
+    // println!("{}", owner1); // error[E0382]: borrow of moved value: `owner1`
+    // Above code would show error as the owner was changed
+    // Thus first owner is invalid and unusable
+    println!("{}", owner2);
+
+    // Not all varaible works like this
+    let own1 = "I can have many owners";
+    let own2 = own1;
+    println!("{} {}", own1, own2);
+
+    // Here own1 and own2 are referencing to the same string literal
+    // But cant be used for ownership. Also it is immutable
+
+    // We can have multiple owners by referencing to the same value like this
+    // Borrowing ownership using Reference
+    let owner3 = &owner2;
+    println!("{} {}", owner2, owner3);
+    // No Error as ownership hasnt moved to owner3 instead owner3 is referencing to owner2
+
+    // Passing owner to another function as owner will invalidate
+    // the ownership of the owner
+
+    invalidate_ownership(owner2); // Passed as Owner
+    println!("Ownership moved to function Scope");
+    // println!("{}", owner2);
+    // Error as ownership move to function scope
+
+    // Also we cant use
+    // println!("{}", owner3);
+    // As `owner3` is referencing to owner1, we cannot pass ownership to the function
+    // `owner3` is automatically dropped after the last time it was called
+    // In this case before we called `invalidate_ownership` function, reference was dropped
+
+    // [Explicit Lifetime]:
+    // Say we have a funtion that takes two references and returns a reference
+    // without cloning or creating a new owned value, we have to return specific value
+    // but we can't do that normally passing references as Rust can't infer
+    // which reference should live long enough to be used
+
+    let s1 = "Text01";
+    let longer_string;
+    {
+        let s2 = "Text 02";
+        longer_string = explicit_lifetime(&s1, &s2);
+    } // [LifeTime]: instead of dropping the reference of s2 here
+
+    // Here if s2 is longer then lifetime of longer_string reference
+    // will be dropped outside of the scope thus can't be used
+    println!("{}", longer_string);
+    // [LifeTime]: reference of s2 and s1 will be dropped here because of explicit lifetime
+
+    // Also there is 'static lifetime which will outlive
+    // all references till the end of program
+    // But this is unsafe and can only be used inside `unsafe` block
+    static mut _IMMORTAL: &'static str = "I will outlive";
+    unsafe {
+        _IMMORTAL = "I will outlive all";
+        println!("{}", _IMMORTAL);
+    }
+
+    // Chapter 5 Done
+    // [Next]: https://tourofrust.com/59_en.html
 }
 
 fn add(x: f32, y: f32) -> f32 {
     return x + y;
 }
 
+// [Destructure]
 fn swap(x: i32, y: i32) -> (i32, i32) {
     // Idiomatic way of returning values from function, if, match
     // or any scope block by typing expression without semicolon at  the end
     (y, x) // No semicolon at the end, returned as value
 }
 
-// C struct
+// [Struct]: C struct
 struct MyStruct {
     x: i32,
     y: f32,
@@ -183,13 +254,13 @@ struct MyStruct {
 // Tupple Structure
 struct TupleStruct(i32, f32, Hbool);
 
-// enum
+// [Enum]
 enum Hbool {
     Yes,
     No,
 }
 
-// Takes enum refrence as argument unlike C function arg,
+// [Enum]: Takes enum refrence as argument unlike C function arg,
 // its more like TS function args with & of course as reference
 fn get_human_boolean(enm_bool: &Hbool) -> &str {
     match enm_bool {
@@ -198,23 +269,42 @@ fn get_human_boolean(enm_bool: &Hbool) -> &str {
     }
 }
 
-// Template or Generics
+// [Generic]:
 struct Generics<T> {
     morph_type_variable: T,
 }
 
+// [Generic]: Takes `T` type as argument and get the data type
 fn generic_func<T>(_v: T) {
     let v_type = type_name::<T>();
     println!("Typeof {}", v_type);
 }
 
-// Error handling
-// Function has to return Result type vaiable which has generics
-
+// [Error Handling]: Function has to return Result type vaiable which has generics
 fn is_even(i: i32) -> Result<String, String> {
     if i % 2 == 0 {
         Ok("Is Even".to_string())
     } else {
         Err("Not Even".to_string())
     }
+}
+
+// [Ownership]: This Function assign the ownership to _s and
+// ownership is dropped after end of the function scope
+fn invalidate_ownership(_s: String) {}
+
+// [Explicit Lifetime]:
+fn explicit_lifetime<'elt1, 'elt2: 'elt1>(s1: &'elt1 str, s2: &'elt2 str) -> &'elt1 str {
+    // <'elt1, 'elt2: 'elt1>
+    // Here 'elt2:'elt1 tells Rust compiler that 'elt2 must outlive 'elt1
+    // Or else 'elt2 might just die
+    if s1.len() < s2.len() {
+        s2
+    } else {
+        s1
+    }
+
+    // return s1.to_string();
+    // This will avoid explicit lifetime all together
+    // but this will create performance overhead for allocating memory(wasted memory)
 }
