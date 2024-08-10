@@ -7,6 +7,7 @@ mod _06_error_handling;
 mod _07_vector;
 mod _08_ownership;
 mod _09_lifetime;
+mod _10_strings;
 fn main() {
     println!("Hello, world!");
 
@@ -20,6 +21,7 @@ fn main() {
     _07_vector::vectors();
     _08_ownership::ownership();
     _09_lifetime::expl_lifetime();
-    // Chapter 5 Done
-    // [Next]: https://tourofrust.com/59_en.html
+    _10_strings::strings();
+    // Chapter 7 OOP
+    // https://tourofrust.com/chapter_7_en.html
 }
