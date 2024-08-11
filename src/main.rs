@@ -8,6 +8,8 @@ mod _07_vector;
 mod _08_ownership;
 mod _09_lifetime;
 mod _10_strings;
+mod _11_oop;
+
 fn main() {
     println!("Hello, world!");
 
@@ -22,6 +24,10 @@ fn main() {
     _08_ownership::ownership();
     _09_lifetime::expl_lifetime();
     _10_strings::strings();
-    // Chapter 7 OOP
-    // https://tourofrust.com/chapter_7_en.html
+    _11_oop::encapsulation();
+    _11_oop::polymorphism();
+    _11_oop::dispatch();
+    _11_oop::box_stack();
+    // https://tourofrust.com/90_en.html
+    // Smart pointer
 }
