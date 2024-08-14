@@ -9,6 +9,7 @@ mod _08_ownership;
 mod _09_lifetime;
 mod _10_strings;
 mod _11_oop;
+mod _12_pointers;
 
 fn main() {
     println!("Hello, world!");
@@ -28,6 +29,6 @@ fn main() {
     _11_oop::polymorphism();
     _11_oop::dispatch();
     _11_oop::box_stack();
-    // https://tourofrust.com/90_en.html
-    // Smart pointer
+    // https://tourofrust.com/93_en.html
+    _12_pointers::pointer();
 }
