@@ -10,6 +10,7 @@ mod _09_lifetime;
 mod _10_strings;
 mod _11_oop;
 mod _12_pointers;
+mod _13_smartpointers;
 
 fn main() {
     println!("Hello, world!");
@@ -29,6 +30,7 @@ fn main() {
     _11_oop::polymorphism();
     _11_oop::dispatch();
     _11_oop::box_stack();
-    // https://tourofrust.com/93_en.html
     _12_pointers::pointer();
+    _13_smartpointers::smart_p();
+    // https://doc.rust-lang.org/book/ch15-01-box.html
 }
