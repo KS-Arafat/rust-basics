@@ -1,5 +1,6 @@
 pub fn functions() {
     // Functions
+    println!("[Functions]:");
     println!("{:?}", add(0.2, 0.3));
 
     // [Destructure]

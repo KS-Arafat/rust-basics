@@ -1,5 +1,6 @@
 pub fn control_flow() {
     // Control Flow
+    println!("[Control Flow]:");
     if 5 < 5 {
         println!("No Round Braket Required for Control Flow");
         // You can use brackets if you want
@@ -30,7 +31,7 @@ pub fn control_flow() {
 
 pub fn loops() {
     // Loops
-
+    println!("[Loops]:");
     let mut i = 0;
 
     // Easy Loop

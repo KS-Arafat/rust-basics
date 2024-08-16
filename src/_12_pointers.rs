@@ -2,6 +2,7 @@ struct DummyStt {
     value: i32,
 }
 pub fn pointer() {
+    println!("[Pointers]: ");
     let mut a = 69;
     let mut b = &a;
     let c = 96;

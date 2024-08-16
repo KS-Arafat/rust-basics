@@ -19,7 +19,7 @@ pub fn expl_lifetime() {
     // without cloning or creating a new owned value, we have to return specific value
     // but we can't do that normally passing references as Rust can't infer
     // which reference should live long enough to be used
-
+    println!("[Explicit Lifetime]:");
     let s1 = "Text01";
     let longer_string;
     {

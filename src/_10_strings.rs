@@ -1,8 +1,9 @@
 pub fn strings() {
-    // String
+    // [String]:
     // String literals are always unicodes so special characters like emojis are allowed
     // Fixed Size String(&str) literals have time complexity of O(n) in worst case for searching
     // We can have multiple lines in same variable  using '\' at the end
+    println!("[String]:");
     let s = "This is a string \
     This 2nd line in One quotation✅";
     println!("{}", s);

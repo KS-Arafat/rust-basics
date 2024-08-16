@@ -5,6 +5,7 @@ fn invalidate_ownership(_s: String) {}
 pub fn ownership() {
     // [Ownership]:
     // Owner Borrow
+    println!("[Ownership]:");
     let owner1 = "I can have one owner".to_string();
     // here owner1 is owner, Ownership can moved
     let owner2 = owner1; // Ownership changed to owner2

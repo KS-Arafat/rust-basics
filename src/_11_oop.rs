@@ -16,8 +16,9 @@ impl Animal {
     }
 }
 
-// [Encapsulation]
+// [Encapsulation]:
 pub fn encapsulation() {
+    println!("[Encapsulation]:");
     let mut animal_instance = Animal {
         animal_type: "🐮".to_string(),
         animal_call: "Moo".to_string(),
@@ -51,7 +52,9 @@ impl Countchildren for Animal {
     // fn loveofmother(&self) -> String {}
 }
 
+// [Polymorphism]:
 pub fn polymorphism() {
+    println!("[Polymorphism]:");
     let cat_animal = Animal {
         animal_type: "😽".to_string(),
         animal_call: "Meow".to_string(),
@@ -82,6 +85,7 @@ fn dynamic_dispatch(animal: &dyn Countchildren) {
 }
 
 pub fn dispatch() {
+    println!("[Dispatch]: ");
     let bird = Animal {
         animal_type: "🐦".to_string(),
         animal_call: "whistle".to_string(),
@@ -99,7 +103,7 @@ struct User {
 
 fn iterating_vector(v: &Vec<Box<User>>) {
     for user in v {
-        println!("{}", user.name);
+        print!("{} ", user.name);
     }
 }
 

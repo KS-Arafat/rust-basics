@@ -1,5 +1,6 @@
 pub fn variables() {
     // Variables
+    println!("[Variable]:");
     let a = true;
     let b = 1; // i32
     let c = 1i8;

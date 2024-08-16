@@ -10,6 +10,7 @@ fn is_even(i: i32) -> Result<String, String> {
 pub fn error_handling() {
     // [Error Handling]: Error handling functions will always return "Result" type and
     // We have to match it with "OK" and "Err"
+    println!("[Error Handling]: ");
     match is_even(11) {
         Ok(v) => println!("{}", v),
         Err(e) => println!("{}", e),

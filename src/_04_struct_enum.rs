@@ -25,7 +25,7 @@ fn get_human_boolean(enm_bool: &Hbool) -> &str {
 
 pub fn struct_enum() {
     // Struct & enum
-
+    println!("[Struct & Enum]:");
     // [Struct]: has to be initalized when assigning to an object
     let obj = MyStruct {
         x: 420,

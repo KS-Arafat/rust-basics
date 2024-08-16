@@ -14,6 +14,7 @@ pub fn generics() {
     // [Generic]: Template or Generics
     // Pass any type of vailable to structure and
     // it wil be morped to that type
+    println!("[Template]:");
     let auto_type_v = Generics {
         morph_type_variable: "Type is not static here",
     };
