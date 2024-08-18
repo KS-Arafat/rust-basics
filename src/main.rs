@@ -11,6 +11,7 @@ mod _10_strings;
 mod _11_oop;
 mod _12_pointers;
 mod _13_smartpointers;
+mod _14_io;
 
 fn main() {
     println!("Hello, world!");
@@ -32,5 +33,7 @@ fn main() {
     _11_oop::box_stack();
     _12_pointers::pointer();
     _13_smartpointers::smart_p();
+    _14_io::cli_input();
+    _14_io::file_io();
     // https://doc.rust-lang.org/book/ch15-01-box.html
 }
