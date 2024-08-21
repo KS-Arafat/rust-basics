@@ -13,6 +13,7 @@ mod _12_pointers;
 mod _13_smartpointers;
 mod _14_io;
 mod _15_closure;
+mod _16_concurrency;
 
 fn main() {
     println!("Hello, world!");
@@ -37,5 +38,9 @@ fn main() {
     _14_io::cli_input(); // Comment This Line Out for Uninterrupted Execution
     _14_io::file_io();
     _15_closure::anon_fn();
-    // https://doc.rust-lang.org/book/ch15-01-box.html
+    _16_concurrency::spawningthread();
+    _16_concurrency::msg_passing();
+    _16_concurrency::mutual_exclusion();
+    _16_concurrency::atomic_ref_count();
+    _16_concurrency::arc_mutex_chain();
 }
