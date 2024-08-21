@@ -1,7 +1,7 @@
 use std::fs::{self, File};
 use std::io::{self, Read, Write};
 use std::path::Path;
-
+#[allow(dead_code)]
 pub fn cli_input() {
     println!("[User IO]: Input Output");
     let mut usr_input = String::new();
